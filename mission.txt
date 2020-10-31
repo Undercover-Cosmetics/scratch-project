@@ -1,0 +1,39 @@
+webpack config is located in node-modules -> react-scripts -> config 
+
+
+-Front End - REACT
+    -Homepage (/index) -> form/search submit -> action will render in a div the product 
+    //inputs for user to review the the product -> stored the in database 
+                                                -> update their review -> and and update in database 
+                                                -> delete the review 
+    -then when click on the product, it will go to -> /products 
+    - then they will go to the /ingredients which will have all the info 
+
+Homepage-components:
+    -div that will render out when user searches 
+
+    
+    
+-Back End + Apis
+
+-APIs for the data: pushing data to the database 
+    -product DB -> get as many cosmetic products as possible (face products/beauty makeup(foundation/concealers)) || eye/lips
+         -Ingredients DB -> display what's harmful from what the user searches
+
+apis: https://makeup-api.herokuapp.com/api/v1/products.json 
+
+    -DB Table (SQL)
+      - 
+
+Node/Express: 
+    -abilty to read and render our the information on requests 
+    -server js : handle routing
+    -Products route -> products controller(middleware) /products
+    -Search route  -> search controller(middleware) => "/" -> pass it as a param 
+     -> stored the in database 
+     -> update their review -> and and update in database 
+     -> delete the review 
+
+    
+
+    
