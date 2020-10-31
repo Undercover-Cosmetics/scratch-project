@@ -1,6 +1,6 @@
 webpack config is located in node-modules -> react-scripts -> config 
 
-
+dtfuyiopiyuytdfyguhi
 -Front End - REACT
     -Homepage (/index) -> form/search submit -> action will render in a div the product 
     //inputs for user to review the the product -> stored the in database 
@@ -19,7 +19,7 @@ test
     andy test
     
 -Back End + Apis
-
+hcgfyuhilugkfyjhdxggjkuhlik
 -APIs for the data: pushing data to the database 
     -product DB -> get as many cosmetic products as possible (face products/beauty makeup(foundation/concealers)) || eye/lips
          -Ingredients DB -> display what's harmful from what the user searches
