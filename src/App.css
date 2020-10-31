@@ -37,6 +37,11 @@ padding: 15px;
   border: 1px solid purple;
 }
 
+.reviewContainer {
+  border: 1px solid teal ;
+}
+
 .reviews {
   border: 1px solid teal ;
 }
+

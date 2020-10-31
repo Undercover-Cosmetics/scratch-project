@@ -4,17 +4,19 @@ const path = require('path');
 const mainController = {};
 
 mainController.getProducts = (req, res, next) => {
-  const { results } = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/products.json'), 'UTF-8'));
-
-  if (!results) {
+  // const {name} = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/products.json'), 'UTF-8'));
+  const result = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/products.json'), 'UTF-8'));
+  console.log("I'm in main controller");
+  console.log(result);
+  if (!result) {
     return next({
-      log: 'fileController.getCharacters: ERROR: Error getting characters data from characters.json file',
-      message: { err: 'Error occurred in fileController.getCharacters. Check server logs for more details.' },
+      log: 'mainController.getProducts: ERROR: Error getting products data from products.json file',
+      message: { err: 'Error occurred in mainController.getProducts. Check server logs for more details.' },
     });
   }
 
-  res.locals.products = results;
-  next();
+  res.locals.products = result;
+  return next();
 }
 
 
@@ -22,5 +24,6 @@ mainController.getProducts = (req, res, next) => {
 // use params for ingredients
 // use params for products
 
+module.exports = mainController;
 
 
