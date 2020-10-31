@@ -11,8 +11,8 @@ webpack config is located in node-modules -> react-scripts -> config
 
 Homepage-components:
     -div that will render out when user searches 
-
-    
+fdsfdsfdsfds
+   
     
 -Back End + Apis
 
