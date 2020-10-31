@@ -10,13 +10,20 @@ const SearchBar = props => {
             <form>
                 <input type='text' placeholder='Search your product here'></input>
                 <button onClick={(e) => {
-                    e.target.value //=> value user input
+                    e.preventDefault();
+                    console.log('in Onclick')
+                    // e.target.value => value user input
                     fetch('/api', {
-                        method: 'POST',
                         headers: {
-                          "Content-Type": "Application/JSON"
-                        },
-                        body: JSON.stringify(bodyObj),
+                            'Content-Type' : 'application/json',
+                            'Accept' : 'application/json'
+                        }
+                    }).then(data => {
+                        console.log(data);
+                        return data.json();
+                    })
+                    .then((data) => {
+                        console.log(data);
                     })
                 }}>Search</button>
             </form>

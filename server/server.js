@@ -3,6 +3,10 @@ const express = require('express')
 const app = express()
 const PORT = 8080
 
+app.get('/', (req, res) => {
+  // res.send('Hello World!');
+  res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
+});
 /**
  * require routers
  */
@@ -12,11 +16,13 @@ const productsRouter = require(path.join(__dirname, './routes/api.js'));
  * handle parsing request body
  */
 app.use(express.json());
-
+console.log('express.json working');
 /**
  * define route handlers
  */
+
 app.use('/api', productsRouter);
+console.log('api working');
 
 // 
 //fetch request for the products database 
