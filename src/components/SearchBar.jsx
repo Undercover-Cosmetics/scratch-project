@@ -7,13 +7,23 @@ const SearchBar = props => {
     //div for the search input 
     return (
         <div id="searchInput">
-            <form method='POST' action='/product'>
+            <form>
                 <input type='text' placeholder='Search your product here'></input>
-                <button>Search</button>
+                <button onClick={(e) => {
+                    e.target.value //=> value user input
+                    fetch('/api', {
+                        method: 'POST',
+                        headers: {
+                          "Content-Type": "Application/JSON"
+                        },
+                        body: JSON.stringify(bodyObj),
+                    })
+                }}>Search</button>
             </form>
         </div>
     )
-
+//{username??:value in the input}
+//req.body.username
 }
 //onClick={
     //fetch(url)
