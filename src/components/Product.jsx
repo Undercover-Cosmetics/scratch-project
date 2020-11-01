@@ -1,6 +1,6 @@
 import React from 'react';
 import UserInput from './UserInput';
-import Reviews from './Reviews';
+// import Reviews from './Reviews';
 
 const Product = props => {
   // console.log('in product', props);
@@ -16,8 +16,8 @@ const Product = props => {
         </div>
       </div>
     
-      <UserInput />
-      <Reviews />
+      <UserInput product={props.product}/>
+      {/* <Reviews product={product}/> */}
     </div>
   )
 }
