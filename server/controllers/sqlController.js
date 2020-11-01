@@ -5,7 +5,7 @@ const sqlController = {}
 /* BEFORE LOGIN */
 /* User not logged in, but wants to see reviews */
 sqlController.getReview = (req, res, next) => {
-  const { id } = req.body.id;
+  const { id } = req.body;
   const review = `SELECT * FROM reviews WHERE 1=1 AND product_key = ${id}`;
   db.query(review)
   .then((data) => {
@@ -21,7 +21,7 @@ sqlController.getReview = (req, res, next) => {
 /* AUTHENTICATION PROCESS */
 /* AUTHENTICATION: Getting one matching from the database */
 sqlController.findOneUser = (req, res, next) => {
-  const { username } = req.body.username; 
+  const { username } = req.body; 
   try{
     const users = `SELECT DISTINCT * FROM users WHERE 1=1 AND username = ${username}`;
     db.query(users)
