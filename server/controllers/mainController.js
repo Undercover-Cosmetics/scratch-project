@@ -22,6 +22,10 @@ mainController.getProducts = (req, res, next) => {
 // use params for ingredients
 // use params for products
 
+
+
+
+
 /* Need to export module */
 module.exports = mainController;
 
