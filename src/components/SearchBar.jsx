@@ -62,7 +62,6 @@ const SearchBar = props => {
                                 image_link: obj.image_link,
                                 description: obj.description
                             };
-                            
 
                             setProduct(foundProduct);
                             console.log('found product:', foundProduct);
