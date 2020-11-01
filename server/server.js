@@ -28,19 +28,19 @@ app.use('/api', productsRouter);
 /* Error Handler */
 app.use((req, res) => {
     return res.sendStatus(404);
-  });
-  
-  // catch-all route handler for any requests to an unknown route
-  app.use((err, req, res, next) => {
+});
+
+// catch-all route handler for any requests to an unknown route
+app.use((err, req, res, next) => {
     const defaultErr = {
-      log: 'Express error handler caught unknown middleware error',
-      status: 400,
-      message: { err: 'An error occurred' }, 
+        log: 'Express error handler caught unknown middleware error',
+        status: 400,
+        message: { err: 'An error occurred' },
     };
-    const errorObj  = Object.assign(defaultErr, err);
+    const errorObj = Object.assign(defaultErr, err);
     console.log(errorObj.log);
     return res.status(errorObj.status).send(errorObj.message);
-  });
+});
 
 
 app.listen(PORT, () => {
