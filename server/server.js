@@ -14,14 +14,13 @@ const productsRouter = require(path.join(__dirname, './routes/api.js'));
 /* Parsing Request Body */
 app.use(express.json());
 
-
 /* Define Route Handler */
 app.use('/api', productsRouter);
 
 /* Error Handler */
 app.use((req, res) => {
-    return res.sendStatus(404);
-  });
+  return res.sendStatus(404);
+});
 
 /* Catchall Error Handler */
 app.use((err, req, res, next) => {
