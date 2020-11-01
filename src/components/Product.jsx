@@ -10,7 +10,7 @@ const Product = props => {
         <div className="productHolder"> 
           <h3>{props.product.brand+' '+props.product.name}</h3>
           <div className="imageHolder">
-            <img src={props.product.image_link} alt="product picture"/>
+            <img src={props.product.image_link} alt={props.product.brand+' '+props.product.name+" picture"}/>
           </div>
           <div className="productInfo"><p>{props.product.description}</p></div>
         </div>

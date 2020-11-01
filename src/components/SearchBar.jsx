@@ -67,7 +67,7 @@ const SearchBar = props => {
                   fetchAndSaveProduct();
                 }}>Search</button>
             </form>
-            <Product product={product}/>
+            {Object.keys(product).length !== 0 && <Product product={product}/>}
         </div>
     )
 }

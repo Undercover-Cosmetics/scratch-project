@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { post } from '../../server/server';
-
 
 const Reviews = props => {
 
   useEffect(() => {
     fetchAndMatchReviews();
-  },[]);
+  },[props.product]);
 
   const fetchAndMatchReviews = () => {
     const reviewsBody = {
