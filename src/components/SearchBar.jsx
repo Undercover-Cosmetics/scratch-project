@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { render } from 'react-dom'
 import Product from './Product'
 
@@ -12,6 +12,7 @@ const SearchBar = props => {
 
     // console.log(brandInput);
     // console.log(productInput)
+
     return (
         <div id="searchInput">
             <form>
@@ -29,7 +30,8 @@ const SearchBar = props => {
                     placeholder='Name of the product'
                     value={productInput}
                     onChange={(e) => {
-                        setProductInput(e.target.value)
+                        setProductInput(e.target.value);
+                        console.log(productInput);
                 }}>
                 </input>
                 <button onClick={(e) => {

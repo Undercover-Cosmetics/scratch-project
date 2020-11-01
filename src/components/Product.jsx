@@ -3,12 +3,16 @@ import UserInput from './UserInput';
 import Reviews from './Reviews';
 
 const Product = props => {
+  console.log('in product', props);
   return (
     <div>
       <div className="mainProductdiv">
         <div className="productHolder"> 
-          <div className="imageHolder"><p>image</p></div>
-          <div className="productInfo"><p>info</p></div>
+          <h3>{props.product.brand+' '+props.product.name}</h3>
+          <div className="imageHolder">
+            <img src={props.product.image_link} alt="product picture"/>
+          </div>
+          <div className="productInfo"><p>{props.product.description}</p></div>
         </div>
       </div>
     
