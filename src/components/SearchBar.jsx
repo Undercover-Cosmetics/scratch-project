@@ -7,11 +7,12 @@ const SearchBar = props => {
     const [productInput, setProductInput] = useState('');
     const [product, setProduct] = useState({});
 
-    const traverseAndFindMatch = data => {
+    const traverseAndFindMatchProduct = data => {
         for(const obj of data) {
             if (obj.brand !== null && obj.name !== null) {
             if (obj.brand.toLowerCase() === brandInput.toLowerCase() && obj.name.toLowerCase() === productInput.toLowerCase()) {
               const foundProduct = {
+                  id: obj.id,
                   brand: obj.brand, 
                   name: obj.name, 
                   image_link: obj.image_link,
@@ -24,7 +25,7 @@ const SearchBar = props => {
     }
 
     //function to fetch from api and save it in product state
-    const fetchAndSave = () => {
+    const fetchAndSaveProduct = () => {
         //fetch from api
         fetch('/api', {
             headers: {
@@ -35,7 +36,7 @@ const SearchBar = props => {
             return data.json();
         })
         .then((data) => {
-            traverseAndFindMatch(data);
+            traverseAndFindMatchProduct(data);
         });
     };
 
@@ -63,7 +64,7 @@ const SearchBar = props => {
                   e.preventDefault();
                   setBrandInput('');
                   setProductInput('');
-                  fetchAndSave();
+                  fetchAndSaveProduct();
                 }}>Search</button>
             </form>
             <Product product={product}/>
