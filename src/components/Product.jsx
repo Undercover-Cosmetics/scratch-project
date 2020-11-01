@@ -3,7 +3,7 @@ import UserInput from './UserInput';
 import Reviews from './Reviews';
 
 const Product = props => {
-  console.log('in product', props);
+  // console.log('in product', props);
   return (
     <div>
       <div className="mainProductdiv">

@@ -36,7 +36,7 @@ const SearchBar = props => {
                 </input>
                 <button onClick={(e) => {
                     e.preventDefault();
-                    console.log('in Onclick');
+                    // console.log('in Onclick');
                     // console.log(brand.value);
                     // console.log(product.value);
                     // e.target.value => value user input
@@ -48,13 +48,13 @@ const SearchBar = props => {
                             'Accept' : 'application/json'
                         }
                     }).then(data => {
-                        console.log('in the promise');
+                        // console.log('in the promise');
                         return data.json();
                     })
                     .then((data) => {
                         // console.log(data)
                         for(const obj of data) {
-                            console.log('in the forEach function')
+                            // console.log('in the forEach function')
                             
                           if (obj.brand !== null && obj.name !== null) {
                           if (obj.brand.toLowerCase() === brandInput && obj.name.toLowerCase() === productInput) {
@@ -66,11 +66,11 @@ const SearchBar = props => {
                             };
 
                             setProduct(foundProduct);
-                            console.log('found product:', foundProduct);
+                            // console.log('found product:', foundProduct);
                             break;
                             }}
                         };
-                        console.log('prod state', product);
+                        // console.log('prod state', product);
                     })
                 }}>Search</button>
             </form>
