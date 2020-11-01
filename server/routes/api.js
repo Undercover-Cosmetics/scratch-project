@@ -6,8 +6,8 @@ const router = express.Router();
 router.get('/',mainController.getProducts,(req, res) => {
   console.log("I'm in api router")
   //  
-  // return res.status(200).json(res.locals.products);
-  return res.status(200);
+  return res.status(200).json(res.locals.products);
+  // return res.status(200);
 })
 
 // router.post('/', )

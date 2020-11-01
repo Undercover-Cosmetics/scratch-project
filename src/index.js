@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
 import App from './App';
 
@@ -7,7 +7,7 @@ import App from './App';
 
 //render the search bar here so it stays consistent with each page?
 
-ReactDOM.render(
+render(
   <React.StrictMode>
 
     <App />
