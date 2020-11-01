@@ -2,7 +2,7 @@ const db = require("../models/reviewsModel.js")
 
 const sqlController = {}
 
-// gets all users from the database
+/* Getting all users from the database */
 sqlController.getAllUsers = (req, res, next) => {
   try{
     const users = `SELECT * FROM users`;
@@ -18,6 +18,7 @@ sqlController.getAllUsers = (req, res, next) => {
   }
 }
 
+/* creating user in the users database */
 sqlController.createUser = (req, res, next) => {
   const { username, password } = req.body;
   const makeUser = `INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *`;
@@ -28,6 +29,11 @@ sqlController.createUser = (req, res, next) => {
     next()
   })
 }
+
+
+
+
+
 
 /* Need to export module */
 module.exports = sqlController;
