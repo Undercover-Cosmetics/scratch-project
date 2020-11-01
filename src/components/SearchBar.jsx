@@ -12,8 +12,8 @@ const SearchBar = props => {
             if (obj.brand !== null && obj.name !== null) {
             if (obj.brand.toLowerCase() === brandInput.toLowerCase() && obj.name.toLowerCase() === productInput.toLowerCase()) {
               const foundProduct = {
-                  brand: brandInput, 
-                  name: productInput, 
+                  brand: obj.brand, 
+                  name: obj.name, 
                   image_link: obj.image_link,
                   description: obj.description
               };
