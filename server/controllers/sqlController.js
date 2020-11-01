@@ -1,11 +1,29 @@
-const db = require("../models/reviewsModel.js")
+const db = require("../models/sqlModel.js")
 
 const sqlController = {}
 
-/* Getting all users from the database */
-sqlController.getAllUsers = (req, res, next) => {
+/* BEFORE LOGIN */
+/* User not logged in, but wants to see reviews */
+sqlController.getReview = (req, res, next) => {
+  const { id } = req.body.id;
+  const review = `SELECT * FROM reviews WHERE 1=1 AND product_key = ${id}`;
+  db.query(review)
+  .then((data) => {
+    res.locals.reviews = data.rows[0];
+    next()
+  })
+  .catch( (err) => {
+    console.log("Product key not valid when finding reviews")
+    next(err)
+  }) 
+}
+
+/* AUTHENTICATION PROCESS */
+/* AUTHENTICATION: Getting one matching from the database */
+sqlController.findOneUser = (req, res, next) => {
+  const { username } = req.body.username; 
   try{
-    const users = `SELECT * FROM users`;
+    const users = `SELECT DISTINCT * FROM users WHERE 1=1 AND username = ${username}`;
     db.query(users)
     .then((data) => {
       res.locals.users = data
@@ -14,11 +32,12 @@ sqlController.getAllUsers = (req, res, next) => {
     })
   }
   catch(err){
+    console.log("findOneUser issue: invalid user name passed")
     next(err)
   }
 }
 
-/* creating user in the users database */
+/* AUTHENTICATION: signup creating user in the users database */
 sqlController.createUser = (req, res, next) => {
   const { username, password } = req.body;
   const makeUser = `INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *`;
@@ -28,12 +47,31 @@ sqlController.createUser = (req, res, next) => {
     res.locals.users = data.rows[0]
     next()
   })
+  .catch( (err) => {
+    console.log("createUser issue: possible duplicate username passed")
+    next(err)
+  }) 
 }
 
+/* USER LOGGED IN ACITONS */
+/* User wants to Write Reviews Username matched with Product Reviews */
+sqlController.writeReviews = (req, res, next) => {
+  const { reviewRating, reviewText, productKey, userId } = req.body;
+  const writeReview = `INSERT INTO reviews(review_rating, review_text, product_key, user_id) VALUES (${1}, ${2}, ${3}, {4})`;
+  db.query(writeReview)
+  .then((data) => {
+    res.locals.newReview = data.rows[0]
+    next()
+  })
+  .catch( (err) => {
+    console.log("write review issue: review could not be created due to datatype issue")
+    next(err)
+  }) 
+}
 
-
-
-
+// `SELECT * FROM reviews LEFT JOIN users ON users.user_id=reviews.user_id WHERE 1=1 AND 2=2`;
+/* USER LOGGED IN ACITONS: Delete review */
+/* USER LOGGED IN ACITONS: Update review */
 
 /* Need to export module */
 module.exports = sqlController;
