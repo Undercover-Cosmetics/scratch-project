@@ -29,5 +29,15 @@ router.post("/addreviews", sqlController.addReview, (req, res)=> {
   return res.status(200).json(res.locals.reviews);
 })
 
+/* USER LOGGED IN ACITONS: UPDATE REVIEW */
+router.post("/updatereviews", sqlController.updateReview, (req, res)=> {
+  return res.status(200).json(res.locals.reviews);
+})
+
+/* USER LOGGED IN ACITONS: DELETE REVIEW */
+router.post("/deletereviews", sqlController.deleteReview, (req, res)=> {
+  return res.status(200).json(res.locals.reviews);
+})
+
 /* Need to export module */
 module.exports = router;
