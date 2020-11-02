@@ -101,14 +101,18 @@ sqlController.editReview = (req, res, next) => {
 
 /* USER LOGGED IN ACITONS: Delete review */
 sqlController.deleteReview = (req, res, next) => {
+  console.log('in delete review')
   const { reviewId } = req.body;
-  const deleteReview = `DELETE FROM reviews WHERE review_id=${reviewId})`;
+  const deleteReview = `DELETE FROM reviews WHERE _id=${reviewId}`;
   db.query(deleteReview)
   .then((data) => {
+    console.log('in query delete review')
     res.locals.newReview = data.rows[0]
+    console.log(res.locals.newReview)
     next()
   })
   .catch( (err) => {
+    console.log(err)
     console.log("delete review issue: invalid parameters passed in")
     next(err)
   }) 
