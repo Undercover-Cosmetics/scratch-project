@@ -3,24 +3,30 @@ const mainController = require('../controllers/mainController');
 const sqlController = require('../controllers/sqlController');
 const router = express.Router();
 
+/* USER NOT LOGGED IN ACITONS: View PRODUCTS */
 /* use getProducts when accessing default route */
 router.get('/', mainController.getProducts,(req, res) => {
   return res.status(200).json(res.locals.products);
 })
 
-/* use getReview when accessing the review route */
+/* USER NOT LOGGED IN ACITONS: View REVIEWS */
 router.post("/reviews", sqlController.getReview, (req, res)=> {
   return res.status(200).json(res.locals.reviews);
 })
 
-/* use findOneUser when accessing the user route */
+/* AUTHENTICATION ACITONS: Find User */
 router.get("/user", sqlController.findOneUser, (req, res)=> {
   return res.status(200).json(res.locals.user);
 })
 
-/* use createUser when accessing the user route */
+/* AUTHENTICATION ACITONS: Create User */
 router.post("/createuser", sqlController.createUser, (req, res)=> {
   return res.status(200).json(res.locals.user);
+})
+
+/* USER LOGGED IN ACITONS: ADD REVIEW */
+router.post("/addreviews", sqlController.addReview, (req, res)=> {
+  return res.status(200).json(res.locals.reviews);
 })
 
 /* Need to export module */

@@ -54,11 +54,11 @@ sqlController.createUser = (req, res, next) => {
 }
 
 /* USER LOGGED IN ACITONS */
-/* User wants to Write Reviews Username matched with Product Reviews */
+/* USER LOGGED IN ACITONS: Add review */
 sqlController.writeReviews = (req, res, next) => {
   const { reviewRating, reviewText, productKey, userId } = req.body;
-  const writeReview = `INSERT INTO reviews(review_rating, review_text, product_key, user_id) VALUES (${1}, ${2}, ${3}, {4})`;
-  db.query(writeReview)
+  const addReview = `INSERT INTO reviews(review_rating, review_text, product_key, user_id) VALUES (${1}, ${2}, cast(${3} as varchar), ${4})`;
+  db.query(addReview)
   .then((data) => {
     res.locals.newReview = data.rows[0]
     next()
@@ -69,9 +69,39 @@ sqlController.writeReviews = (req, res, next) => {
   }) 
 }
 
-// `SELECT * FROM reviews LEFT JOIN users ON users.user_id=reviews.user_id WHERE 1=1 AND 2=2`;
-/* USER LOGGED IN ACITONS: Delete review */
+
 /* USER LOGGED IN ACITONS: Update review */
+sqlController.editReviews = (req, res, next) => {
+  const { reviewRating, reviewText, productKey, userId } = req.body;
+  const editReview = `UPDATE reviews SET review_rating=${1}, review_text=${2}, product_key=cast(${3} as varchar), user_id=${4} WHERE product_key=cast(${3} as varchar) AND user_id=${4}`;
+  db.query(editReview)
+  .then((data) => {
+    res.locals.newReview = data.rows[0]
+    next()
+  })
+  .catch( (err) => {
+    console.log("edit review issue: invalid parameters passed in")
+    next(err)
+  }) 
+}
+
+
+/* USER LOGGED IN ACITONS: Delete review */
+sqlController.deleteReviews = (req, res, next) => {
+  const { reviewRating, reviewText, productKey, userId } = req.body;
+  const deleteReview = `DELETE FROM reviews WHERE 1=1 AND review_rating=${1} AND review_text=${2} AND product_key=cast(${3} as varchar) AND user_id=${4}`;
+  db.query(deleteReview)
+  .then((data) => {
+    res.locals.newReview = data.rows[0]
+    next()
+  })
+  .catch( (err) => {
+    console.log("delete review issue: invalid parameters passed in")
+    next(err)
+  }) 
+}
+
+// `SELECT * FROM reviews LEFT JOIN users ON users.user_id=reviews.user_id WHERE 1=1 AND 2=2`;
 
 
 
