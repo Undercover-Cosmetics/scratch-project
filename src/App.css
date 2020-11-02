@@ -22,14 +22,20 @@ padding: 15px;
   /* height: 200px;  */
 }
 
+image {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+}
 .imageHolder{
   border: 1px solid red;
-  /* width: 350px; */
-  /* height: 200px;  */
+  width: 250px; 
+  height: 400px; 
+
 }
 .productInfo {
   border: 1px solid red;
-  /* overflow: auto; */
+  overflow: auto; 
   /* height: 180px; */
 }
 
@@ -38,10 +44,38 @@ padding: 15px;
 }
 
 .reviewContainer {
-  border: 1px solid teal ;
+  border: 1px solid teal;
+  padding: 10px;
 }
 
 .reviews {
-  border: 1px solid teal ;
+  border: 1px solid teal;
+}
+.review {
+  border: 1px solid teal;
+  display: flex;
+  padding: 5px;
+  margin: 0;
+}
+.userReviewInput {
+  border: 1px solid teal;
 }
 
+.reviewButtons {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  margin-left: 800px;
+  border: 1px solid teal;
+ 
+}
+
+.reviewRender {
+  border: 1px solid teal;
+  overflow: auto;
+
+}
+
+.editable {
+  border: 1px solid teal;
+}
