@@ -9,7 +9,7 @@ sqlController.getReview = (req, res, next) => {
   const review = `SELECT * FROM reviews WHERE product_key = cast(${id} as varchar)`;
   db.query(review)
   .then((data) => {
-    res.locals.reviews = data.rows[0];
+    res.locals.reviews = data.rows;
     next()
   })
   .catch((err) => {
