@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 const Reviews = props => {
+  //when there is any update in product state, 
+  //fetch for that product reviews from database
   useEffect(() => {
     fetchAndMatchReviews();
   },[props.product]);

@@ -1,9 +1,8 @@
 import React from 'react';
-import UserInput from './UserInput';
+import UserLogin from './UserLogin';
 // import Reviews from './Reviews';
 
 const Product = props => {
-  // console.log('in product', props);
   return (
     <div>
       <div className="mainProductdiv">
@@ -16,16 +15,10 @@ const Product = props => {
         </div>
       </div>
     
-      <UserInput product={props.product}/>
+      <UserLogin product={props.product}/>
       {/* <Reviews product={product}/> */}
     </div>
   )
 }
 
-//component did mount 
-
-
-//component update 
-
-//render
 export default Product;

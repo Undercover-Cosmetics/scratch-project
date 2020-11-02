@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Product from './Product'
 
 const SearchBar = props => {
@@ -7,20 +7,22 @@ const SearchBar = props => {
     const [productInput, setProductInput] = useState('');
     const [product, setProduct] = useState({});
 
+    //from the fetched api, travese/find/return the matching product
     const traverseAndFindMatchProduct = data => {
         for(const obj of data) {
             if (obj.brand !== null && obj.name !== null) {
-            if (obj.brand.toLowerCase() === brandInput.toLowerCase() && obj.name.toLowerCase() === productInput.toLowerCase()) {
-              const foundProduct = {
-                  id: obj.id,
-                  brand: obj.brand, 
-                  name: obj.name, 
-                  image_link: obj.image_link,
-                  description: obj.description
-              };
-              setProduct(foundProduct);
-              break;
-              }}
+                if (obj.brand.toLowerCase() === brandInput.toLowerCase() && obj.name.toLowerCase() === productInput.toLowerCase()) {
+                const foundProduct = {
+                    id: obj.id,
+                    brand: obj.brand, 
+                    name: obj.name, 
+                    image_link: obj.image_link,
+                    description: obj.description
+                };
+                setProduct(foundProduct);
+                break;
+              }
+            }
           };
     }
 
@@ -43,6 +45,7 @@ const SearchBar = props => {
     return (
         <div id="searchInput">
             <form>
+                {/* set the values of inputs to corresponding state props when there is any input changes */}
                 <input 
                     type='text' 
                     name='brand' 
@@ -61,28 +64,19 @@ const SearchBar = props => {
                 }}>
                 </input>
                 <button onClick={(e) => {
+                  //prevent the click to invoke any reloading
                   e.preventDefault();
+                  //reset the values of inputs to empty string
                   setBrandInput('');
                   setProductInput('');
+                  //get the data and save it in the product state
                   fetchAndSaveProduct();
                 }}>Search</button>
             </form>
+            {/* conditional rendering: only render the product component when user makes a successful search */}
             {Object.keys(product).length !== 0 && <Product product={product}/>}
         </div>
     )
 }
-//{username??:value in the input}
-//req.body.username
-//onClick={
-    //fetch(url)
-    //.then(data.json -> components)
-    //backend -> frontend
-
-    //fetch data from json file
-    //return data(image source url...) - shaped in server
-    //stored in state
-    //pass down the state into product
-    //set attribute to render
-//}
 
 export default SearchBar

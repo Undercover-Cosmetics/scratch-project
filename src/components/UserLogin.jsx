@@ -4,6 +4,7 @@ import Reviews from './Reviews';
 
 const UserInput = props => {
   // console.log(props);
+  const [valid, setValid] = useState(false);
     return (
         <div className="userInput">
           <h1>User Input</h1>
