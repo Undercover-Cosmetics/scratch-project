@@ -6,7 +6,7 @@ const sqlController = {}
 /* User not logged in, but wants to see reviews */
 sqlController.getReview = (req, res, next) => {
   const { id } = req.body;
-  const review = `SELECT * FROM reviews WHERE product_key = cast(${id} as varchar)`;
+  const review = `SELECT * FROM reviews WHERE product_key = ${id}`;
   db.query(review)
   .then((data) => {
     res.locals.reviews = data.rows;
@@ -23,10 +23,10 @@ sqlController.getReview = (req, res, next) => {
 sqlController.findOneUser = (req, res, next) => {
   const { username } = req.body; 
   try{
-    const users = `SELECT DISTINCT * FROM users WHERE 1=1 AND username = ${username}`;
-    db.query(users)
+    const user = `SELECT DISTINCT * FROM users WHERE 1=1 AND username = ${username}`;
+    db.query(user)
     .then((data) => {
-      res.locals.users = data
+      res.locals.user = data
       console.log(data);
       next()
     })
@@ -37,14 +37,18 @@ sqlController.findOneUser = (req, res, next) => {
   }
 }
 
+sqlController.findUserDetail = (req, res, next) => {
+  
+}
+
 /* AUTHENTICATION: signup creating user in the users database */
 sqlController.createUser = (req, res, next) => {
   const { username, password } = req.body;
-  const makeUser = `INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *`;
+  const makeUser = `INSERT INTO users (username, password) VALUES (${username}, ${password}) RETURNING *`;
   const params = [username, password];
   db.query(makeUser, params)
   .then((data) => {
-    res.locals.users = data.rows[0]
+    res.locals.user = data.rows[0]
     next()
   })
   .catch( (err) => {
@@ -55,15 +59,19 @@ sqlController.createUser = (req, res, next) => {
 
 /* USER LOGGED IN ACITONS */
 /* USER LOGGED IN ACITONS: Add review */
-sqlController.writeReviews = (req, res, next) => {
-  const { reviewRating, reviewText, productKey, userId } = req.body;
-  const addReview = `INSERT INTO reviews(review_rating, review_text, product_key, user_id) VALUES (${1}, ${2}, cast(${3} as varchar), ${4})`;
+sqlController.addReview = (req, res, next) => {
+  console.log('in add review function')
+  const { reviewRating, reviewText, productKey } = req.body;
+  console.log(req.body);
+  const addReview = `INSERT INTO reviews(review_rating, review_text, product_key) VALUES (${reviewRating}, '${reviewText}', ${productKey}) RETURNING *`;
   db.query(addReview)
   .then((data) => {
+    console.log('in query for add review')
     res.locals.newReview = data.rows[0]
     next()
   })
   .catch( (err) => {
+    console.log(err)
     console.log("write review issue: review could not be created due to datatype issue")
     next(err)
   }) 
@@ -71,15 +79,20 @@ sqlController.writeReviews = (req, res, next) => {
 
 
 /* USER LOGGED IN ACITONS: Update review */
-sqlController.editReviews = (req, res, next) => {
-  const { reviewRating, reviewText, productKey, userId } = req.body;
-  const editReview = `UPDATE reviews SET review_rating=${1}, review_text=${2}, product_key=cast(${3} as varchar), user_id=${4} WHERE product_key=cast(${3} as varchar) AND user_id=${4}`;
+sqlController.editReview = (req, res, next) => {
+  console.log('in edit review controller')
+  const { reviewRating, reviewText, reviewId} = req.body;
+  console.log(reviewRating, reviewText, reviewId)
+  const editReview = `UPDATE reviews SET review_rating=${reviewRating}, review_text=${reviewText} WHERE review_id=${reviewId}`;
+
   db.query(editReview)
   .then((data) => {
+    console.log('in db query(editReview')
     res.locals.newReview = data.rows[0]
     next()
   })
   .catch( (err) => {
+    console.log(err)
     console.log("edit review issue: invalid parameters passed in")
     next(err)
   }) 
@@ -87,9 +100,9 @@ sqlController.editReviews = (req, res, next) => {
 
 
 /* USER LOGGED IN ACITONS: Delete review */
-sqlController.deleteReviews = (req, res, next) => {
-  const { reviewRating, reviewText, productKey, userId } = req.body;
-  const deleteReview = `DELETE FROM reviews WHERE 1=1 AND review_rating=${1} AND review_text=${2} AND product_key=cast(${3} as varchar) AND user_id=${4}`;
+sqlController.deleteReview = (req, res, next) => {
+  const { reviewId } = req.body;
+  const deleteReview = `DELETE FROM reviews WHERE review_id=${reviewId})`;
   db.query(deleteReview)
   .then((data) => {
     res.locals.newReview = data.rows[0]
