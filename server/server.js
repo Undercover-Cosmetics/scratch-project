@@ -3,6 +3,10 @@ const express = require('express')
 const app = express()
 const PORT = 8080
 
+/* Parsing Request Body */
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 /* Render Default Page */
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
@@ -10,9 +14,6 @@ app.get('/', (req, res) => {
 
 /* Require Routers */
 const productsRouter = require(path.join(__dirname, './routes/api.js'));
-
-/* Parsing Request Body */
-app.use(express.json());
 
 /* Define Route Handler */
 app.use('/api', productsRouter);

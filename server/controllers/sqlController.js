@@ -6,6 +6,7 @@ const sqlController = {}
 /* User not logged in, but wants to see reviews */
 sqlController.getReview = (req, res, next) => {
   const { id } = req.body;
+  console.log('getreview request body',req.body);
   const review = `SELECT * FROM reviews WHERE 1=1 AND product_key = ${id}`;
   db.query(review)
   .then((data) => {

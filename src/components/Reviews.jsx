@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 
 const Reviews = props => {
-
   useEffect(() => {
     fetchAndMatchReviews();
   },[props.product]);
 
   const fetchAndMatchReviews = () => {
     const reviewsBody = {
-      id: props.product.id
+      'id': props.product.id
     }
-    fetch('./api/reviews', {
+    fetch('/api/reviews', {
       method: 'POST',
-      header: {
-        "Content-Type": "Application/JSON"
+      headers: {
+        'Content-Type': 'Application/JSON'
       },
       body: JSON.stringify(reviewsBody)
-    }).then(data => data.json())
+    }
+    ).then(data => data.json())
     .then(data => {
-      console.log(data);
+      console.log('printing response data',data);
     })
   };
     return (

@@ -9,7 +9,7 @@ router.get('/', mainController.getProducts,(req, res) => {
 })
 
 /* use getReview when accessing the review route */
-router.get("/reviews", sqlController.getReview, (req, res)=> {
+router.post("/reviews", sqlController.getReview, (req, res)=> {
   return res.status(200).json(res.locals.reviews);
 })
 
