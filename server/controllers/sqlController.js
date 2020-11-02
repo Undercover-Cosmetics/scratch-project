@@ -6,14 +6,14 @@ const sqlController = {}
 /* User not logged in, but wants to see reviews */
 sqlController.getReview = (req, res, next) => {
   const { id } = req.body;
-  const review = `SELECT * FROM reviews WHERE 1=1 AND product_key = ${id}`;
+  const review = `SELECT * FROM reviews WHERE product_key = cast(${id} as varchar)`;
   db.query(review)
   .then((data) => {
     res.locals.reviews = data.rows[0];
     next()
   })
-  .catch( (err) => {
-    console.log("Product key not valid when finding reviews")
+  .catch((err) => {
+    console.log(err)
     next(err)
   }) 
 }
