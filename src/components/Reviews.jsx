@@ -3,6 +3,18 @@ import React, { useState, useEffect } from 'react';
 const Reviews = props => {
   //when there is any update in product state, 
   //fetch for that product reviews from database
+  const [reviewsArr, setReviewsArr] = useState([]);
+  const reviews = [];
+  //review_rating: 4
+  //review_text: "this is a test"
+  for(let i = 0; i < reviewsArr.length; i++){
+    reviews.push(<div key={i}>
+      <p>username</p>
+      <p>{reviewsArr[i].review_rating}</p>
+      <p>{reviewsArr[i].review_text}</p>
+    </div>);
+  }
+
   useEffect(() => {
     fetchAndMatchReviews();
   },[props.product]);
@@ -21,6 +33,7 @@ const Reviews = props => {
     ).then(data => data.json())
     .then(data => {
       console.log('printing response data',data);
+      setReviewsArr(data);
     })
   };
     return (
@@ -31,6 +44,7 @@ const Reviews = props => {
           <button>EDIT
           </button>
           <button>DELETE</button></div>
+          {reviews}
         </div>
     )
 }
