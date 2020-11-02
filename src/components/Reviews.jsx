@@ -10,17 +10,17 @@ const Reviews = props => {
 
   useEffect(() => {
     fetchAndMatchReviews();
-  },[props.product]);
-  
+  }, [props.product]);
+
   const reviews = [];
 
-  for(let i = 0; i < reviewsArr.length; i++){
+  for (let i = 0; i < reviewsArr.length; i++) {
     reviews.push(
-    <div key={i} className='review'>
-      <p>username</p>
-      <p>{reviewsArr[i].review_rating}</p>
-      <p>{reviewsArr[i].review_text}</p>
-    </div>);
+      <div key={i} className='review'>
+        <p>username</p>
+        <p>{reviewsArr[i].review_rating}</p>
+        <p>{reviewsArr[i].review_text}</p>
+      </div>);
   }
   const fetchAndMatchReviews = () => {
     const reviewsBody = {
@@ -33,40 +33,40 @@ const Reviews = props => {
       },
       body: JSON.stringify(reviewsBody)
     }).then(data => data.json())
-    .then(data => {
-      // console.log('printing response data',data);
-      setReviewsArr(data);
-    })
+      .then(data => {
+        // console.log('printing response data',data);
+        setReviewsArr(data);
+      })
   };
-    return (
-      <div className="reviewContainer">
-        <h1>Review Input</h1>
-        <div className="reviews">
-          <input type='text' value={username} name='username' onChange={(e) => setUsername(e.target.value)}></input>
-          <input type='text' value={userReview} name='userReview' onChange={(e) => setUserReview(e.target.value)}></input>
-          <button onClick={(e) => {
-            e.preventDefault();
-            const userReviewObj = {
-              'username': username, 
-              'review': userReview
-            }
-            fetch('/', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'Application/JSON'
-              }, 
-              body: JSON.stringify(userReviewObj)
-            }).then(data => data.json()).then(data => {
-              setReviewsArr([...reviewsArr, data])
-            })
-          }}>UPLOAD</button>
-          {/* <button>EDIT</button>
+  return (
+    <div className="reviewContainer">
+      <h1>Review Input</h1>
+      <div className="reviews">
+        <input type='text' value={username} name='username' onChange={(e) => setUsername(e.target.value)}></input>
+        <input type='text' value={userReview} name='userReview' onChange={(e) => setUserReview(e.target.value)}></input>
+        <button onClick={(e) => {
+          e.preventDefault();
+          const userReviewObj = {
+            'username': username,
+            'review': userReview
+          }
+          fetch('/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'Application/JSON'
+            },
+            body: JSON.stringify(userReviewObj)
+          }).then(data => data.json()).then(data => {
+            setReviewsArr([...reviewsArr, data])
+          })
+        }}>UPLOAD</button>
+        {/* <button>EDIT</button>
           <button>DELETE</button> */}
-        </div>
-        <p>Yo thiss product is sooo coool</p>
-        {reviews}
       </div>
-    )
+      <p>Yo thiss product is sooo coool</p>
+      {reviews}
+    </div>
+  )
 }
 
 
