@@ -1,20 +1,51 @@
 import React, { useState } from 'react';
-// import { render } from 'react-dom'
 import Product from './Product'
 
-//render 
-
 const SearchBar = props => {
-    //div for the search input 
+    //create state for inputs and storage for fetched data
     const [brandInput, setBrandInput] = useState('');
     const [productInput, setProductInput] = useState('');
     const [product, setProduct] = useState({});
 
-    // console.log(brandInput);
-    // console.log(productInput)
+    //from the fetched api, travese/find/return the matching product
+    const traverseAndFindMatchProduct = data => {
+        for(const obj of data) {
+            if (obj.brand !== null && obj.name !== null) {
+                if (obj.brand.toLowerCase() === brandInput.toLowerCase() && obj.name.toLowerCase() === productInput.toLowerCase()) {
+                const foundProduct = {
+                    id: obj.id,
+                    brand: obj.brand, 
+                    name: obj.name, 
+                    image_link: obj.image_link,
+                    description: obj.description
+                };
+                setProduct(foundProduct);
+                break;
+              }
+            }
+          };
+    }
+
+    //function to fetch from api and save it in product state
+    const fetchAndSaveProduct = () => {
+        //fetch from api
+        fetch('/api', {
+            headers: {
+                'Content-Type' : 'application/json',
+                'Accept' : 'application/json'
+            }
+        }).then(data => {
+            return data.json();
+        })
+        .then((data) => {
+            traverseAndFindMatchProduct(data);
+        });
+    };
+
     return (
         <div id="searchInput">
             <form>
+                {/* set the values of inputs to corresponding state props when there is any input changes */}
                 <input 
                     type='text' 
                     name='brand' 
@@ -29,67 +60,23 @@ const SearchBar = props => {
                     placeholder='Name of the product'
                     value={productInput}
                     onChange={(e) => {
-                        setProductInput(e.target.value)
+                        setProductInput(e.target.value);
                 }}>
                 </input>
                 <button onClick={(e) => {
-                    e.preventDefault();
-                    console.log('in Onclick');
-                    // console.log(brand.value);
-                    // console.log(product.value);
-                    // e.target.value => value user input
-                   setBrandInput('');
-                   setProductInput('');
-                    fetch('/api', {
-                        headers: {
-                            'Content-Type' : 'application/json',
-                            'Accept' : 'application/json'
-                        }
-                    }).then(data => {
-                        console.log('in the promise');
-                        return data.json();
-                    })
-                    .then((data) => {
-                        // console.log(data)
-                        for(const obj of data) {
-                            console.log('in the forEach function')
-                            
-                          if (obj.brand !== null && obj.name !== null) {
-                          if (obj.brand.toLowerCase() === brandInput && obj.name.toLowerCase() === productInput) {
-                            const foundProduct = {
-                                brand: brandInput, 
-                                name: productInput, 
-                                image_link: obj.image_link,
-                                description: obj.description
-                            };
-
-                            setProduct(foundProduct);
-                            console.log('found product:', foundProduct);
-                            break;
-                            }}
-                        };
-                        console.log('prod state', product);
-                    })
+                  //prevent the click to invoke any reloading
+                  e.preventDefault();
+                  //reset the values of inputs to empty string
+                  setBrandInput('');
+                  setProductInput('');
+                  //get the data and save it in the product state
+                  fetchAndSaveProduct();
                 }}>Search</button>
             </form>
-            <Product product={product}/>
+            {/* conditional rendering: only render the product component when user makes a successful search */}
+            {Object.keys(product).length !== 0 && <Product product={product}/>}
         </div>
     )
-//{username??:value in the input}
-//req.body.username
 }
-//onClick={
-    //fetch(url)
-    //.then(data.json -> components)
-    //backend -> frontend
-
-    //fetch data from json file
-    //return data(image source url...) - shaped in server
-    //stored in state
-    //pass down the state into product
-    //set attribute to render
-
-    
-//}
 
 export default SearchBar

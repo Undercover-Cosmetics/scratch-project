@@ -1,27 +1,24 @@
 import React from 'react';
-import UserInput from './UserInput';
-import Reviews from './Reviews';
+import UserLogin from './UserLogin';
+// import Reviews from './Reviews';
 
 const Product = props => {
   return (
     <div>
       <div className="mainProductdiv">
         <div className="productHolder"> 
-          <div className="imageHolder"><p>image</p></div>
-          <div className="productInfo"><p>info</p></div>
+          <h3>{props.product.brand+' '+props.product.name}</h3>
+          <div className="imageHolder">
+            <img src={props.product.image_link} alt={props.product.brand+' '+props.product.name+" picture"}/>
+          </div>
+          <div className="productInfo"><p>{props.product.description}</p></div>
         </div>
       </div>
     
-      <UserInput />
-      <Reviews />
+      <UserLogin product={props.product}/>
+      {/* <Reviews product={product}/> */}
     </div>
   )
 }
 
-//component did mount 
-
-
-//component update 
-
-//render
 export default Product;
