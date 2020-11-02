@@ -73,6 +73,8 @@ sqlController.writeReviews = (req, res, next) => {
 /* USER LOGGED IN ACITONS: Delete review */
 /* USER LOGGED IN ACITONS: Update review */
 
+
+
 /* Need to export module */
 module.exports = sqlController;
 
