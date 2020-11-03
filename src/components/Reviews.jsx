@@ -8,7 +8,7 @@ const Reviews = props => {
   const [userEditedRating, setUserEditedRating] = useState(0);
   //when there is any update in product state, 
   //fetch for that product reviews from database
-  const [reviewsArr, setReviewsArr] = useState([]);
+  let [reviewsArr, setReviewsArr] = useState([]);
 
   const [editable, setEditable] = useState(false);
 
@@ -17,19 +17,18 @@ const Reviews = props => {
   }, [props.product]);
 
   // useEffect(() => {
-
+  //   fetchAndMatchReviews();
   // }, [reviewsArr]);
 
   const reviews = [];
-
   for (let i = 0; i < reviewsArr.length; i++) {
-    // console.log('review id',reviewsArr[i]._id);
     reviews.push(
-      <div key={reviewsArr._id} id={reviewsArr._id} className='review'>
+      <div key={reviewsArr[i]._id} id={reviewsArr[i]._id} className='review'>
         <div className="userReviewInput">
           <p>username</p>
           <p>{reviewsArr[i].review_rating}</p>
           <p>{reviewsArr[i].review_text}</p>
+
           {editable ? <div className="editable">
             <label for="rating">Rating (between 0 and 5):</label>
             <input type="range" id="vol" name="vol" min="0" max="5" value={userEditedRating} onChange={(e) => {
@@ -40,9 +39,33 @@ const Reviews = props => {
             }}></input>
             <input type='text' placeholder="Input Edits here" value={userEditedReview} name='userEditedReview' onChange={(e) => setUserEditedReview(e.target.value)}></input>
 
-            <button>Submit changes</button>
+            <button onClick={(e) => {
+              e.preventDefault();
+              setEditable(false);
+
+              const userReviewObj = {
+                'reviewRating': reviewsArr[i].review_rating,
+                'reviewText': reviewsArr[i].review_text,
+                'reviewId': reviewsArr[i]._id
+              }
+              // console.log(userReviewObj)
+              fetch('/api/editreview', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'Application/JSON'
+                },
+                body: JSON.stringify(userReviewObj)
+              }).then(data => data.json()).then(data => {
+                console.log(data)
+                setReviewsArr([...reviewsArr, data])
+                // console.log(reviewsArr);
+
+              })
+
+            }}>Submit changes</button>
 
           </div> : null}
+          {/* end of conditinal rendering for edit */}
         </div>
         <div className="reviewButtons">
           {/* { reviewRating, reviewText, reviewId} */}
@@ -50,13 +73,36 @@ const Reviews = props => {
             // console.log("this is the target", e.target)
             e.preventDefault();
             setEditable(true)
+            console.log(e.target)
 
           }}>EDIT</button>
-          <button>Delete</button>
+
+
+
+          <button onClick={(e) => {
+            console.log('in Delete button', i)
+            console.log(reviewsArr[i]._id)
+            fetch('/api/deletereview', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'Application/JSON'
+              },
+              body: JSON.stringify({
+                'reviewId': reviewsArr[i]._id
+              })
+            }).then(data => {
+              reviewsArr.splice(i, 1)
+              setReviewsArr(reviewsArr)
+              console.log(reviewsArr)
+              fetchAndMatchReviews()
+            })
+
+          }}>Delete</button>
         </div>
       </div>
     )
-  }
+  }//end of for loop
+
   const fetchAndMatchReviews = () => {
     const reviewsBody = {
       'id': props.product.id
@@ -103,27 +149,18 @@ const Reviews = props => {
             body: JSON.stringify(userReviewObj)
           }).then(data => data.json()).then(data => {
             setReviewsArr([...reviewsArr, data])
-            // {_id: 4, review_rating: 4, review_text: "awesome", product_key: 949, user_id: null, …}
-            // last_modified: "2020-11-02T08:00:00.000Z"
-            // product_key: 949
-            // review_rating: 4
-            // review_text: "awesome"
-            // user_id: null
-            // _id: 4
-            // __proto__: Object
+
             console.log(reviewsArr);
           })
         }}>UPLOAD</button>
-        {/* <button>EDIT</button>
-          <button>DELETE</button> */}
+
       </div>
       <div className="reviewRender">
+        <p>Yo thiss product is sooo coool</p>
         {reviews}
 
       </div>
     </div>
-        { reviews }
-      </div >
   )
 }
 
