@@ -5,17 +5,17 @@ import Reviews from './Reviews';
 const UserInput = props => {
   // console.log(props);
   const [valid, setValid] = useState(false);
-    return (
-        <div className="userInput">
-          <h1>User Login</h1>
-          {/* <form>
+  return (
+    <div className="userInput">
+
+      {/* <form>
             <input type='text' name='username'></input>
             <input type='text' name='password'></input>
             <button onClick={(e)=>{e.preventDefault()}}>Submit</button>
           </form> */}
-          <Reviews product={props.product}/>
-        </div>
-    )
+      <Reviews product={props.product} />
+    </div>
+  )
 }
 
 
