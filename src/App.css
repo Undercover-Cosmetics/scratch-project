@@ -2,21 +2,52 @@
   text-align: center;
 }
 
+.searchbar .headername {
+  font-size: 100px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.searchbar {
+  /* border: 1px solid blue; */
+  height: 200px;
+  padding-top: 5px;
+  font-size: 20px;
+}
+
+.searchbar input[type=text] {
+  height: 30px;
+  font-size: 20px;
+}
+
+.searchbarbutton {
+  height: 36px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+
 /* for the productdiv  */
-
 .mainProductdiv {
-
 overflow: auto;
-max-height: 300px;
-border: 1px solid red;
+max-height: auto;
+display:flex;
+/* border: 1px solid blue; */
 padding: 15px;
+vertical-align: middle;
+text-align: center;
+justify-content: center;
+align-items: center;
 }
 
 .productHolder {
   display: flex; 
   flex-direction: column;
-  border: 1px solid red;
-  max-width: 250px;
+  /* border: 1px solid blue; */
+  width: 500px;
+
+
   /* overflow: auto;  */
   /* width: 400px; */
   /* height: 200px;  */
@@ -28,54 +59,81 @@ image {
   vertical-align: middle;
 }
 .imageHolder{
-  border: 1px solid red;
-  width: 250px; 
+  /* border: 1px solid red; */
+  width: 500px; 
   height: 400px; 
 
 }
 .productInfo {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   overflow: auto; 
   /* height: 180px; */
 }
 
 .UserInput {
-  border: 1px solid purple;
+  /* border: 1px solid purple; */
 }
 
 .reviewContainer {
-  border: 1px solid teal;
+  /* border: 1px solid teal; */
   padding: 10px;
 }
 
 .reviews {
+  padding: 5% 10%;
   border: 1px solid teal;
+display: flex;
+flex-direction: column;
 }
+
 .review {
   border: 1px solid teal;
   display: flex;
-  padding: 5px;
+  padding: 0 150px;
   margin: 0;
+  text-align: left;
+  justify-content: space-between;
 }
-.userReviewInput {
+
+#userreviewinput{
   border: 1px solid teal;
+  height: 150px;
+}
+
+.userReviewInput {
+  min-width: 200px;
+}
+
+#reviewbutton {
+  height: 36px;
+  font-size: 20px;
+  font-weight: bold;
+  width: 200px;  
 }
 
 .reviewButtons {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
+  justify-content: space-between;
   float: right;
   margin-left: 800px;
-  border: 1px solid teal;
- 
+  /* border: 1px solid teal; */
+ padding: 30px;
 }
 
-.reviewRender {
-  border: 1px solid teal;
-  overflow: auto;
-
-}
 
 .editable {
   border: 1px solid teal;
+}
+
+.editbutton {
+  height: 36px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.deletebutton {
+  height: 36px;
+  font-size: 20px;
+  font-weight: bold;
 }
