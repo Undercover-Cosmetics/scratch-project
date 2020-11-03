@@ -10,7 +10,7 @@ const Reviews = props => {
   const [userEditedReview, setUserEditedReview] = useState('');
   const [userEditedRating, setUserEditedRating] = useState(0);
   //product reviews from database
-  let [reviewsArr, setReviewsArr] = useState([]);
+  const [reviewsArr, setReviewsArr] = useState([]);
   //flag for edit 
   const[editable, setEditable] = useState(false);
 
