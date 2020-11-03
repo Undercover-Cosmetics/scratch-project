@@ -157,7 +157,6 @@ const Reviews = props => {
 
         </div>
         <div className="reviewRender"></div>
-        {/* <p>Yo thiss product is sooo coool</p> */}
         {reviews}
     </div>//end of container
   )//end of return

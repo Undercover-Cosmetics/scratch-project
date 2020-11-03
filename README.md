@@ -1,3 +1,30 @@
+## Before start
+
+Use `npm install` to install all the modules.
+
+The location of the webpack is in node_modules -> react-scripts -> config
+
+Use `nodemon server/server.js` or `node server/server.js` and `npm start` to run the app.
+
+If you need to create a database to actually see on your side, use the following command to create the table in Elephant SQL:
+    CREATE TABLE users (
+  user_id SERIAL PRIMARY KEY,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(50) NOT NULL,
+  last_modified DATE DEFAULT now()
+  )
+
+  CREATE TABLE reviews (
+  _id SERIAL PRIMARY KEY,
+  review_rating integer NOT NULL,
+  review_text VARCHAR(500) DEFAULT NULL,
+  product_key integer NOT NULL,
+  user_id integer,
+  last_modified DATE DEFAULT now()
+  )
+and also change PG_URI in sqlModel to your own database URI.
+
+helpful documentation: https://docs.google.com/document/d/1ttgcRC_F18xtaCj8nXrWzBhn3uk3fhecSfihIeDeLMM/edit?usp=sharing
 
 ## Available Scripts
 
