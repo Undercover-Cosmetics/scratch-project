@@ -1,3 +1,11 @@
+button {
+  background-color: teal;
+  color: white;
+  border-radius: 3px;
+  border: 1px solid;
+  border-color: #d9d9d9;
+}
+
 .wrapper {
   text-align: center;
 }
@@ -24,9 +32,8 @@
   height: 36px;
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
 }
-
-
 
 /* for the productdiv  */
 .mainProductdiv {
@@ -53,16 +60,15 @@ align-items: center;
   /* height: 200px;  */
 }
 
-image {
-  max-width: 100%;
-  max-height: 100%;
-  vertical-align: middle;
-}
 .imageHolder{
   /* border: 1px solid red; */
   width: 500px; 
   height: 400px; 
 
+}
+.imageHolder img {
+  max-width: 100%;
+  max-height: 100%;
 }
 .productInfo {
   /* border: 1px solid red; */
@@ -87,9 +93,10 @@ flex-direction: column;
 }
 
 .review {
+  /* width: 100%; */
   border: 1px solid teal;
   display: flex;
-  padding: 0 150px;
+  padding: 0 20px;
   margin: 0;
   text-align: left;
   justify-content: space-between;
@@ -108,7 +115,8 @@ flex-direction: column;
   height: 36px;
   font-size: 20px;
   font-weight: bold;
-  width: 200px;  
+  width: 200px;
+  cursor: pointer;  
 }
 
 .reviewButtons {
@@ -116,7 +124,7 @@ flex-direction: column;
   flex-flow: column wrap;
   justify-content: space-between;
   float: right;
-  margin-left: 800px;
+  /* margin-left: 800px; */
   /* border: 1px solid teal; */
  padding: 30px;
 }
